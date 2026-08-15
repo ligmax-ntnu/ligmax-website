@@ -1,17 +1,20 @@
 ---
 import { Image } from 'astro:assets';
+import MediaCarousel from './MediaCarousel.astro';
 import sensorCoverage from '../assets/lidar-coverage.png';
 import cameraCoverage from '../assets/camera-coverage.png';
 import batteryPack from '../assets/battery-pack-assembly.jpeg';
 import lidarTest from '../assets/lidar-scan-test.png';
 import buoyDetection from '../assets/buoy-detection.png';
 import gimbalDrawing from '../assets/lidar-gimbal-drawing.png';
+import batteryInBox from '../assets/battery-in-box.png';
+import batteryWithBms from '../assets/battery-with-bms.png';
+import batteryCellsWelded from '../assets/battery-cells-welded.png';
 import frontLidarMount from '../assets/front-lidar-mount.png';
 import lidarGimbalPhoto from '../assets/lidar-gimbal-photo.png';
 import lidarRange12m from '../assets/lidar-range-12m.jpg';
 import lidarBuoyColoured from '../assets/lidar-buoy-coloured.jpg';
-import cameraFrameCam0 from '../assets/camera-frame-cam0.jpg';
-import cameraFrameCam1 from '../assets/camera-frame-cam1.jpg';
+import cameraViewCombined from '../assets/camera-view-combined.jpg';
 
 const loops = [
   {
@@ -94,19 +97,22 @@ const features = [
   {
     title: 'A custom gimbal for the front lidar',
     eyebrow: 'Stabilisation · Loop 04',
-    images: [
-      {
-        image: frontLidarMount,
-        alt: 'Close-up render of the gimbal-stabilised front lidar mounted in the carbon-fibre bow',
-        caption: 'The gimbal as designed, carrying the 360° lidar in the bow.',
-      },
-      {
-        image: lidarGimbalPhoto,
-        alt: 'The finished lidar gimbal mounted inside the carbon-fibre bow, photographed with the lidar lifted off',
-        caption:
-          'The same gimbal as built, with the lidar lifted off: the brushless motor underneath and the plate the sensor bolts to.',
-      },
-    ],
+    carousel: {
+      ratio: '1 / 1',
+      slides: [
+        {
+          image: frontLidarMount,
+          alt: 'Close-up render of the gimbal-stabilised front lidar mounted in the carbon-fibre bow',
+          caption: 'As designed: the gimbal carrying the 360° lidar up in the bow.',
+        },
+        {
+          image: lidarGimbalPhoto,
+          alt: 'The finished lidar gimbal mounted inside the carbon-fibre bow, photographed with the lidar lifted off',
+          caption:
+            'As built, with the lidar lifted off — the brushless motor underneath and the bare plate the sensor bolts onto.',
+        },
+      ],
+    },
     dark: true,
     body: [
       'The third loop guards perception directly. The front 360° lidar rides on a compact gimbal designed and built in-house, just over 100 mm across, with its own dedicated IMU for fast, local correction. Whatever pitch and roll remain after the hull-level loops, the gimbal cancels, holding the scan plane horizontal at all times.',
@@ -116,26 +122,28 @@ const features = [
   {
     title: 'Object detection, straight from geometry',
     eyebrow: 'Sensing & autonomy',
-    images: [
-      {
-        image: sensorCoverage,
-        alt: 'Top-down visualisation of the 360-degree lidar coverage around the vessel',
-      },
-      {
-        pair: [
-          {
-            image: lidarRange12m,
-            alt: 'Live lidar plot with returns held out near the twelve metre range ring',
-          },
-          {
-            image: lidarBuoyColoured,
-            alt: 'Live lidar plot showing a buoy cluster at about five metres, drawn in red',
-          },
-        ],
-        caption:
-          'Live plots off the boat. Left: returns held out at the 12 m edge of the front lidar’s zone. Right: a buoy cluster at about 5 m, drawn red once the cameras have put a colour on it.',
-      },
-    ],
+    carousel: {
+      ratio: '4 / 3',
+      slides: [
+        {
+          image: sensorCoverage,
+          alt: 'Top-down visualisation of the 360-degree lidar coverage around the vessel',
+          caption: 'Two 360° lidars, one gimbal-stabilised at the bow and one aft, covering every bearing.',
+        },
+        {
+          image: lidarRange12m,
+          alt: 'Live lidar plot with returns held out near the twelve metre range ring',
+          caption:
+            'A live plot off the boat: returns held right out at the 12 m edge of the front lidar’s zone.',
+        },
+        {
+          image: lidarBuoyColoured,
+          alt: 'Live lidar plot showing a buoy cluster at about five metres, drawn in red',
+          caption:
+            'A buoy clustered out of raw scan returns at about 5 m — drawn red once the cameras have put a colour on it.',
+        },
+      ],
+    },
     dark: true,
     body: [
       'Two 360° lidars, one gimbal-stabilised at the bow and one aft, give continuous range data on every bearing. A deterministic Euclidean clustering algorithm groups the scan returns into candidate objects, each with a range, bearing and size: fast, explainable detection with no training data required.',
@@ -145,26 +153,22 @@ const features = [
   {
     title: 'Cameras add what lidar cannot: colour',
     eyebrow: 'Sensing & autonomy',
-    images: [
-      {
-        image: cameraCoverage,
-        alt: 'Visualisation of the usable forward field of view of the two wide-angle cameras',
-      },
-      {
-        pair: [
-          {
-            image: cameraFrameCam0,
-            alt: 'Raw frame from the first 220° camera, heavily curved by the wide-angle lens',
-          },
-          {
-            image: cameraFrameCam1,
-            alt: 'Raw frame from the second 220° camera at the same instant, covering the other half of the scene',
-          },
-        ],
-        caption:
-          'Both cameras at the same instant, straight off the boat. The marker board sits at the inner edge of each frame — that is where the two fields of view overlap.',
-      },
-    ],
+    carousel: {
+      ratio: '2 / 1',
+      slides: [
+        {
+          image: cameraCoverage,
+          alt: 'Visualisation of the usable forward field of view of the two wide-angle cameras',
+          caption: 'The usable forward arc the two 220° wide-angle cameras cover between them.',
+        },
+        {
+          image: cameraViewCombined,
+          alt: 'The two 220° camera frames joined into a single wide view of the scene in front of the boat',
+          caption:
+            'Both cameras at one instant, joined into a single frame: the entire forward view the boat has. The marker board sits on the seam, where the two fields overlap.',
+        },
+      ],
+    },
     dark: true,
     body: [
       'Lidar is colour-blind, and the course is not: channel buoys are red and green. Two 220° wide-angle cameras cover the whole forward arc, and a probabilistic classifier projects each lidar detection into the camera frame and samples its colour, labelling objects without a single neural weight.',
@@ -193,12 +197,35 @@ const features = [
   {
     title: 'Resilient systems & safety',
     eyebrow: 'Engineering for the water',
-    images: [
-      {
-        image: batteryPack,
-        alt: 'The 12S12P lithium-ion battery pack during assembly',
-      },
-    ],
+    carousel: {
+      ratio: '1 / 1',
+      slides: [
+        {
+          image: batteryInBox,
+          alt: 'The completed battery sealed inside its carbon-fibre enclosure, with an orange cable drag chain running off the lid',
+          caption:
+            'Finished: sealed into its own fireproof enclosure. The drag chain feeds power and BMS data along as the whole box slides fore and aft on its rails.',
+        },
+        {
+          image: batteryWithBms,
+          alt: 'The finished pack out of its box, wrapped in kapton with a Daly battery management system and main power leads fitted',
+          caption:
+            'Out of the box: wrapped, with the Daly BMS for per-cell telemetry and the main leads onto the propulsion bus.',
+        },
+        {
+          image: batteryCellsWelded,
+          alt: 'The pack with nickel strips spot-welded across the cells, before the BMS was fitted',
+          caption:
+            'Before the BMS — 12S12P of welded cells. The step cut out of the bottom front is deliberate: it lets the pack run to the forward stop with part of itself over the drive motor.',
+        },
+        {
+          image: batteryPack,
+          alt: 'Bare Samsung 18650 cells arranged in a block on the workbench with nickel strips laid over them, before welding',
+          caption:
+            'And the start of it: 144 Samsung INR18650-35E cells laid up on the bench with the nickel strips waiting to be welded.',
+        },
+      ],
+    },
     dark: false,
     body: [
       'Safety-critical control is deliberately separated from autonomy: a Pixhawk 6C flight controller owns hard-real-time control and failsafes, while a Raspberry Pi 5 and an NVIDIA Jetson Orin Nano Super run planning and perception. All propulsion power routes through a physical emergency-stop safety loop.',
@@ -253,20 +280,12 @@ const evidence = [
       {features.map((feature, index) => (
         <article class:list={['feature', { 'feature--flip': index % 2 === 1 }]} data-reveal>
           <div class:list={['feature-media', { 'feature-media--dark': feature.dark }]}>
-            {feature.images.map((item) => (
+            {feature.carousel && (
+              <MediaCarousel slides={feature.carousel.slides} ratio={feature.carousel.ratio} />
+            )}
+            {(feature.images ?? []).map((item) => (
               <figure class="media-figure">
-                {item.pair ? (
-                  <div class="media-pair">
-                    {item.pair.map((half) => (
-                      <Image
-                        src={half.image}
-                        alt={half.alt}
-                        widths={[320, 480, 720]}
-                        sizes="(max-width: 900px) 46vw, 260px"
-                      />
-                    ))}
-                  </div>
-                ) : item.video ? (
+                {item.video ? (
                   <video
                     class="media-video"
                     src={`/videos/${item.video}.mp4`}
@@ -409,6 +428,7 @@ const evidence = [
   }
 
   .feature-media--dark {
+    --carousel-caption-color: #9db8e8;
     background:
       radial-gradient(30rem 18rem at 50% 42%, rgba(120, 158, 224, 0.2), transparent 70%),
       linear-gradient(180deg, var(--navy-900), var(--navy-800));
@@ -443,16 +463,6 @@ const evidence = [
     height: auto;
   }
 
-  /* Two frames read as one continuous scene, so they butt up against each other. */
-  .media-pair {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-  }
-
-  .media-pair img {
-    display: block;
-  }
 
   .media-video {
     display: block;
