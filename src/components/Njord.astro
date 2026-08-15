@@ -1,95 +1,32 @@
 ---
-const facts = [
-  {
-    heading: 'Opening round',
-    title: '4th place',
-    body: 'Scored one day after the boat was pulled out of the fjord flooded and stripped for cleaning.',
-  },
-  {
-    heading: 'Final standing',
-    title: '14th overall',
-    body: 'Seawater damage kept taking components out for the rest of the week, faster than we could replace them.',
-  },
-  {
-    heading: 'Where',
-    title: 'Trondheim, Norway',
-    body: 'Raced on the Trondheimsfjord, the world’s first designated test area for autonomous vessels.',
-  },
-];
 ---
 
 <section class="section section--soft" id="njord">
   <div class="container">
-    <div class="njord-head" data-reveal>
-      <span class="eyebrow">Result &middot; Njord 2026</span>
-      <h2 class="section-title">The Autonomous Ship Challenge</h2>
+    <div class="njord-block" data-reveal>
+      <span class="eyebrow">One week of it &middot; August 2026</span>
+      <h2 class="section-title">We took it to Njord</h2>
       <p class="section-lead">
-        Njord is the international student competition for autonomous surface vessels, hosted annually in
-        Trondheim by students at NTNU. Teams from around the world design, build and operate their vessels
-        through a series of maritime tasks, judged on autonomy, engineering quality and design. It was the
-        first competition Ligmax entered, and it did not go the way we planned — the boat flooded during
-        testing on day one, and we spent the rest of the week rebuilding it between runs.
+        Njord, the Autonomous Ship Challenge, is the international student competition for autonomous
+        surface vessels, held on the Trondheimsfjord by students at NTNU. It was the first time we entered
+        the boat in anything, and it was a rough week: the hull flooded during testing on day one, and we
+        spent the rest of it rebuilding between runs. We finished fourteenth, and came home with a much
+        better list of what to fix than a clean run would have given us.
       </p>
-    </div>
-
-    <div class="njord-cards">
-      {facts.map((fact) => (
-        <article class="njord-card" data-reveal>
-          <span class="njord-card-heading">{fact.heading}</span>
-          <h3>{fact.title}</h3>
-          <p>{fact.body}</p>
-        </article>
-      ))}
-    </div>
-
-    <div class="njord-cta" data-reveal>
-      <a class="btn btn--primary" href="/competition">Read what happened at Njord 2026</a>
-      <p class="njord-link">
-        Learn more about the competition at
-        <a href="https://www.njordchallenge.com/" target="_blank" rel="noopener">njordchallenge.com</a>
-      </p>
+      <div class="njord-cta">
+        <a class="btn btn--primary" href="/competition">Read what happened at Njord 2026</a>
+        <p class="njord-link">
+          More about the competition at
+          <a href="https://www.njordchallenge.com/" target="_blank" rel="noopener">njordchallenge.com</a>
+        </p>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .njord-head {
-    margin-bottom: clamp(2rem, 4vw, 3rem);
-  }
-
-  .njord-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
-  }
-
-  .njord-card {
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-sm);
-    padding: 1.7rem 1.6rem 1.5rem;
-    border-top: 3px solid var(--brand);
-  }
-
-  .njord-card-heading {
-    display: block;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 0.55rem;
-  }
-
-  .njord-card h3 {
-    font-size: 1.18rem;
-    margin-bottom: 0.45rem;
-  }
-
-  .njord-card p {
-    margin: 0;
-    font-size: 0.97rem;
+  .njord-block {
+    max-width: 72ch;
   }
 
   .njord-cta {
@@ -97,7 +34,7 @@ const facts = [
     flex-wrap: wrap;
     align-items: center;
     gap: 1rem 1.75rem;
-    margin-top: 2rem;
+    margin-top: 1.75rem;
   }
 
   .njord-link {
@@ -108,11 +45,5 @@ const facts = [
 
   .njord-link a {
     font-weight: 600;
-  }
-
-  @media (max-width: 860px) {
-    .njord-cards {
-      grid-template-columns: 1fr;
-    }
   }
 </style>

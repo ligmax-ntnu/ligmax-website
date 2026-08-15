@@ -1,5 +1,7 @@
 ---
 import { Image } from 'astro:assets';
+import batteryTrim from '../assets/pitch-trim-battery.png';
+import rollTrim from '../assets/roll-trim-outriggers.png';
 import sensorCoverage from '../assets/lidar-coverage.png';
 import cameraCoverage from '../assets/camera-coverage.png';
 import batteryPack from '../assets/battery-pack-assembly.jpeg';
@@ -37,8 +39,12 @@ const features = [
         width: 1280,
         height: 720,
         alt: 'The Ligmax battery sliding forward and back along its linear rails inside the hull',
-        caption:
-          'The pitch loop on the bench at Njord 2026 — the battery running fore and aft on its rails.',
+        caption: 'The pitch loop on the bench — the battery running fore and aft on its rails.',
+      },
+      {
+        image: batteryTrim,
+        alt: 'Cutaway render showing the battery sliding fore and aft inside the main hull',
+        caption: 'The same loop in section: the battery is the trim mass, riding rails along the hull.',
       },
     ],
     dark: true,
@@ -56,8 +62,12 @@ const features = [
         width: 1280,
         height: 720,
         alt: 'The Ligmax outriggers driving up and down to counter roll',
-        caption:
-          'The roll loop on the bench at Njord 2026 — the amas driving up and down against roll.',
+        caption: 'The roll loop on the bench — the amas driving up and down against roll.',
+      },
+      {
+        image: rollTrim,
+        alt: 'Render of the outriggers shifting vertically to counter roll',
+        caption: 'The same loop in section: each outrigger rides a linear actuator that sets its height.',
       },
     ],
     dark: true,

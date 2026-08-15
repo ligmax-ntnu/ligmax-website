@@ -7,23 +7,9 @@ import VideoFigure from '../components/VideoFigure.astro';
 import teamFlag from '../assets/njord-team-flag.jpg';
 import popUpLights from '../assets/njord-pop-up-lights.jpg';
 
-const scoreboard = [
-  { label: 'Opening round', value: '4th' },
-  { label: 'Final standing', value: '14th' },
-  { label: 'Lost for good', value: 'Lidars, BMS' },
-];
-
 // All clips were filmed on the final day of the competition, once the boat had
 // been rebuilt. Sizes match the encoded files in /public/videos.
 const onWater = [
-  {
-    name: 'smooth-driving',
-    title: 'Driving under power',
-    duration: '0:13',
-    width: 1280,
-    height: 720,
-    caption: 'The boat running on open water on the last day of the competition.',
-  },
   {
     name: 'ama-height-live',
     title: 'Setting ride height live',
@@ -81,29 +67,21 @@ const onBench = [
 ---
 
 <BaseLayout
-  title="Njord 2026 — Ligmax | Fourth after round one, fourteenth overall"
-  description="How Ligmax's first Njord Autonomous Ship Challenge went: a flooded boat on day one, fourth place in the opening round, and a part-by-part rebuild filmed on the final day."
+  title="Njord 2026 — Ligmax | A flooded boat and a week-long rebuild"
+  description="One week of the Ligmax project: the boat flooded on the first day of testing at the Njord Autonomous Ship Challenge, and the team rebuilt it part by part between runs."
 >
   <Header />
   <main id="main">
     <section class="page-intro">
       <div class="container">
         <span class="intro-eyebrow">Njord 2026 &middot; Trondheim</span>
-        <h1>Fourth after round one, fourteenth by the end</h1>
+        <h1>A flooded boat, and a week spent rebuilding it</h1>
         <p>
-          The tasks were not what beat us. Hardware was. On the first day of testing the boat went under,
-          and although we got it running again in time to place fourth in the opening round, the damage
-          kept surfacing for the rest of the week. This is what happened, and what the boat could still do
-          on the final day.
+          Njord was one week out of a project that has run far longer, and it was the week the hardware
+          decided to fail. The boat went under on the first day of testing, and the damage kept surfacing
+          until the last day. The tasks were never the hard part. This is what happened, and what the boat
+          could still do once we had it back together.
         </p>
-        <ul class="scoreboard">
-          {scoreboard.map((item) => (
-            <li>
-              <span class="scoreboard-value">{item.value}</span>
-              <span class="scoreboard-label">{item.label}</span>
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
 
@@ -129,19 +107,20 @@ const onBench = [
             level survived; the sensor it was built for did not.
           </p>
 
-          <h2>Fourth place, one day later</h2>
+          <h2>Back on the water the next day</h2>
           <p>
-            We went out the next day and placed fourth in the opening round. That was the high point of the
-            week, and it happened roughly twenty-four hours after pulling a flooded boat out of the
-            fjord.
+            We went out the following morning and ran the opening round, roughly twenty-four hours after
+            pulling a flooded boat out of the fjord. It scored fourth. Getting the boat to start at all was
+            the part we were pleased with.
           </p>
 
           <h2>Then it came apart, one piece at a time</h2>
           <p>
             The cleaning bought us the opening round, but it did not stop what the seawater had started.
             Oxidation kept spreading, and components failed one after another for the rest of the
-            competition. We finished fourteenth overall. The tasks themselves were not as hard as we had
-            expected going in — we simply could not keep the hardware alive long enough to run them.
+            competition, which is where the week ended up — fourteenth. The tasks themselves were not as
+            hard as we had expected going in; we simply could not keep the hardware alive long enough to
+            run them.
           </p>
 
           <h2>Rebuilt by the final day</h2>
@@ -163,7 +142,19 @@ const onBench = [
             Filmed after the rebuild, running on the fjord without lidars or the BMS.
           </p>
         </div>
-        <div class="clip-grid clip-grid--three">
+        <div class="clip-feature">
+          <VideoFigure
+            name="smooth-driving"
+            title="Driving under power"
+            duration="0:13"
+            width={1280}
+            height={720}
+            caption="The boat running on open water on the last day of the competition, back under its own power after a week of repairs."
+            featured
+          />
+        </div>
+
+        <div class="clip-grid clip-grid--two">
           {onWater.map((clip) => <VideoFigure {...clip} />)}
         </div>
       </div>
@@ -300,35 +291,6 @@ const onBench = [
     margin: 0;
   }
 
-  .scoreboard {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2.5rem;
-    margin: 2rem 0 0;
-    padding: 1.5rem 0 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.14);
-  }
-
-  .scoreboard-value {
-    display: block;
-    color: #fff;
-    font-size: 1.6rem;
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-  }
-
-  .scoreboard-label {
-    display: block;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #9db8e8;
-    margin-top: 0.35rem;
-  }
-
   .story {
     max-width: 68ch;
   }
@@ -353,10 +315,6 @@ const onBench = [
   .clip-grid {
     display: grid;
     gap: 1.5rem;
-  }
-
-  .clip-grid--three {
-    grid-template-columns: repeat(3, 1fr);
   }
 
   .clip-grid--two {
@@ -420,22 +378,11 @@ const onBench = [
     gap: 0.9rem;
   }
 
-  @media (max-width: 980px) {
-    .clip-grid--three {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
   @media (max-width: 760px) {
-    .clip-grid--three,
     .clip-grid--two,
     .aftermath,
     .stills {
       grid-template-columns: 1fr;
-    }
-
-    .scoreboard {
-      gap: 1.5rem 2rem;
     }
   }
 </style>
