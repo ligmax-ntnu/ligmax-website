@@ -1,0 +1,79 @@
+---
+---
+
+<section class="section" id="on-water">
+  <div class="container">
+    <div class="onwater-head" data-reveal>
+      <span class="eyebrow">On the water</span>
+      <h2 class="section-title">See the boat work</h2>
+      <p class="section-lead">
+        Ligmax under way on open water, running straight and level under its own power. Everything below
+        &mdash; the trim loops, the sensor stack, the ground station &mdash; exists to make this look
+        uneventful.
+      </p>
+    </div>
+
+    <figure class="onwater-figure" data-reveal>
+      <video
+        class="onwater-video"
+        src="/videos/hero-loop.mp4"
+        poster="/videos/hero-loop.jpg"
+        width="1280"
+        height="720"
+        controls
+        muted
+        loop
+        playsinline
+        preload="none"
+        aria-label="The Ligmax trimaran running under power on open water"
+      ></video>
+    </figure>
+  </div>
+</section>
+
+<script>
+  // Start the clip only once it is actually on screen, so the file is never
+  // fetched for visitors who don't scroll this far. Without JS it stays a poster
+  // frame with working controls.
+  const video = document.querySelector<HTMLVideoElement>('.onwater-video');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (video && !reduced && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        }
+      },
+      { threshold: 0.35 }
+    );
+    observer.observe(video);
+  }
+</script>
+
+<style>
+  .onwater-head {
+    max-width: 62ch;
+    margin-bottom: clamp(1.6rem, 3vw, 2.2rem);
+  }
+
+  .onwater-figure {
+    margin: 0;
+  }
+
+  .onwater-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: var(--navy-950);
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-md);
+  }
+</style>

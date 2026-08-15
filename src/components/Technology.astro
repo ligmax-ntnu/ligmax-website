@@ -7,7 +7,11 @@ import lidarTest from '../assets/lidar-scan-test.png';
 import buoyDetection from '../assets/buoy-detection.png';
 import gimbalDrawing from '../assets/lidar-gimbal-drawing.png';
 import frontLidarMount from '../assets/front-lidar-mount.png';
-import operatorConsole from '../assets/operator-console.jpg';
+import lidarGimbalPhoto from '../assets/lidar-gimbal-photo.png';
+import lidarRange12m from '../assets/lidar-range-12m.jpg';
+import lidarBuoyColoured from '../assets/lidar-buoy-coloured.jpg';
+import cameraFrameCam0 from '../assets/camera-frame-cam0.jpg';
+import cameraFrameCam1 from '../assets/camera-frame-cam1.jpg';
 
 const loops = [
   {
@@ -48,7 +52,7 @@ const features = [
     dark: true,
     body: [
       'Instead of relying on hull shape alone, Ligmax keeps itself level mechanically. The 1.8 kWh battery, the heaviest component on board, slides fore and aft on linear rails, driven by a dual-shaft stepper and belt, moving the centre of mass to trim pitch.',
-      'The battery does double duty as energy store and trim mass, so the stabilisation costs almost no extra weight. Trimming the vessel to the right attitude to plane also cuts wetted area and drag at speed.',
+      'The battery does double duty as energy store and trim mass, so the stabilisation costs almost no extra weight. The pack is notched at its forward bottom corner so it can run all the way to the front stop with part of itself sitting over the drive motor, buying travel a plain rectangular block would give up. Trimming the vessel to the right attitude to plane also cuts wetted area and drag at speed.',
     ],
   },
   {
@@ -94,6 +98,13 @@ const features = [
       {
         image: frontLidarMount,
         alt: 'Close-up render of the gimbal-stabilised front lidar mounted in the carbon-fibre bow',
+        caption: 'The gimbal as designed, carrying the 360° lidar in the bow.',
+      },
+      {
+        image: lidarGimbalPhoto,
+        alt: 'The finished lidar gimbal mounted inside the carbon-fibre bow, photographed with the lidar lifted off',
+        caption:
+          'The same gimbal as built, with the lidar lifted off: the brushless motor underneath and the plate the sensor bolts to.',
       },
     ],
     dark: true,
@@ -110,6 +121,20 @@ const features = [
         image: sensorCoverage,
         alt: 'Top-down visualisation of the 360-degree lidar coverage around the vessel',
       },
+      {
+        pair: [
+          {
+            image: lidarRange12m,
+            alt: 'Live lidar plot with returns held out near the twelve metre range ring',
+          },
+          {
+            image: lidarBuoyColoured,
+            alt: 'Live lidar plot showing a buoy cluster at about five metres, drawn in red',
+          },
+        ],
+        caption:
+          'Live plots off the boat. Left: returns held out at the 12 m edge of the front lidar’s zone. Right: a buoy cluster at about 5 m, drawn red once the cameras have put a colour on it.',
+      },
     ],
     dark: true,
     body: [
@@ -125,6 +150,20 @@ const features = [
         image: cameraCoverage,
         alt: 'Visualisation of the usable forward field of view of the two wide-angle cameras',
       },
+      {
+        pair: [
+          {
+            image: cameraFrameCam0,
+            alt: 'Raw frame from the first 220° camera, heavily curved by the wide-angle lens',
+          },
+          {
+            image: cameraFrameCam1,
+            alt: 'Raw frame from the second 220° camera at the same instant, covering the other half of the scene',
+          },
+        ],
+        caption:
+          'Both cameras at the same instant, straight off the boat. The marker board sits at the inner edge of each frame — that is where the two fields of view overlap.',
+      },
     ],
     dark: true,
     body: [
@@ -137,8 +176,12 @@ const features = [
     eyebrow: 'Operations',
     images: [
       {
-        image: operatorConsole,
-        alt: 'The Ligmax operator console showing live camera feed with buoy detection, minimap, lidar world model and safety-critical telemetry',
+        video: 'gui-first-run',
+        width: 1280,
+        height: 766,
+        alt: 'The Ligmax operator console tracking the vessel between buoys, with live telemetry and a plain-language readout of what the autonomy is doing',
+        caption:
+          'The console on the first-run data from Njord: what the boat is doing, where it is, and the reason behind every call it makes.',
       },
     ],
     dark: true,
@@ -212,7 +255,18 @@ const evidence = [
           <div class:list={['feature-media', { 'feature-media--dark': feature.dark }]}>
             {feature.images.map((item) => (
               <figure class="media-figure">
-                {item.video ? (
+                {item.pair ? (
+                  <div class="media-pair">
+                    {item.pair.map((half) => (
+                      <Image
+                        src={half.image}
+                        alt={half.alt}
+                        widths={[320, 480, 720]}
+                        sizes="(max-width: 900px) 46vw, 260px"
+                      />
+                    ))}
+                  </div>
+                ) : item.video ? (
                   <video
                     class="media-video"
                     src={`/videos/${item.video}.mp4`}
@@ -387,6 +441,17 @@ const evidence = [
   .feature-media img {
     width: 100%;
     height: auto;
+  }
+
+  /* Two frames read as one continuous scene, so they butt up against each other. */
+  .media-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .media-pair img {
+    display: block;
   }
 
   .media-video {

@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import vesselRender from '../assets/vessel-render.png';
+
 const stats = [
   { value: '≈5 kW', label: 'Combined thrust' },
   { value: '1.8 kWh', label: 'Li-ion energy store' },
@@ -24,29 +27,16 @@ const stats = [
     </div>
 
     <figure class="hero-visual">
-      <video
-        class="hero-video"
-        src="/videos/hero-loop.mp4"
-        poster="/videos/hero-loop.jpg"
-        width="1280"
-        height="720"
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        aria-label="The Ligmax trimaran running under power on open water"
-      ></video>
+      <Image
+        class="hero-render"
+        src={vesselRender}
+        alt="Render of the Ligmax trimaran: a carbon-fibre main hull flanked by two outriggers on retractable arms"
+        widths={[560, 840, 1200, 1682]}
+        sizes="(max-width: 900px) 92vw, 640px"
+        loading="eager"
+      />
     </figure>
   </div>
-
-  <script>
-    // Autoplay only when the visitor has not asked for reduced motion; without JS
-    // the poster frame stands in, so the hero never looks broken.
-    const heroVideo = document.querySelector<HTMLVideoElement>('.hero-video');
-    if (heroVideo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      heroVideo.play().catch(() => {});
-    }
-  </script>
 
   <div class="container">
     <dl class="hero-stats">
@@ -133,17 +123,14 @@ const stats = [
     filter: blur(6px);
   }
 
-  .hero-video {
+  /* The render is a cut-out on transparency, so it floats on the hero gradient
+     with no card behind it — only a soft drop shadow to lift it off. */
+  .hero-render {
     position: relative;
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    border-radius: var(--radius);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: var(--navy-950);
-    box-shadow: 0 30px 40px rgba(0, 0, 0, 0.45);
+    filter: drop-shadow(0 26px 34px rgba(0, 0, 0, 0.5));
   }
 
   .hero-stats {
