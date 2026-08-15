@@ -1,7 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import batteryTrim from '../assets/pitch-trim-battery.png';
-import rollTrim from '../assets/roll-trim-outriggers.png';
 import sensorCoverage from '../assets/lidar-coverage.png';
 import cameraCoverage from '../assets/camera-coverage.png';
 import batteryPack from '../assets/battery-pack-assembly.jpeg';
@@ -24,6 +22,11 @@ const loops = [
   },
   {
     number: '03',
+    title: 'Ride height',
+    body: 'Driving both outriggers the same way lifts the main hull higher or lets it settle.',
+  },
+  {
+    number: '04',
     title: 'Sensors',
     body: 'A custom-built gimbal holds the front lidar level through any residual motion.',
   },
@@ -40,11 +43,6 @@ const features = [
         height: 720,
         alt: 'The Ligmax battery sliding forward and back along its linear rails inside the hull',
         caption: 'The pitch loop on the bench — the battery running fore and aft on its rails.',
-      },
-      {
-        image: batteryTrim,
-        alt: 'Cutaway render showing the battery sliding fore and aft inside the main hull',
-        caption: 'The same loop in section: the battery is the trim mass, riding rails along the hull.',
       },
     ],
     dark: true,
@@ -64,11 +62,6 @@ const features = [
         alt: 'The Ligmax outriggers driving up and down to counter roll',
         caption: 'The roll loop on the bench — the amas driving up and down against roll.',
       },
-      {
-        image: rollTrim,
-        alt: 'Render of the outriggers shifting vertically to counter roll',
-        caption: 'The same loop in section: each outrigger rides a linear actuator that sets its height.',
-      },
     ],
     dark: true,
     body: [
@@ -77,8 +70,26 @@ const features = [
     ],
   },
   {
-    title: 'A custom gimbal for the front lidar',
+    title: 'Ride height, set on the water',
     eyebrow: 'Stabilisation · Loop 03',
+    images: [
+      {
+        video: 'ama-height-live',
+        width: 1280,
+        height: 720,
+        alt: 'The Ligmax outriggers driving down together to change how deep the main hull sits in the water',
+        caption: 'Ride height being set while under way — both amas driving the same direction together.',
+      },
+    ],
+    dark: true,
+    body: [
+      'The outriggers that fight roll also decide how deep the boat sits. Driving both actuators the same way, instead of against each other, presses the amas down and lifts the main hull clear of the water, or lets it settle back in. It is a separate axis of control sharing the same hardware as the roll loop.',
+      'Ride height is set live while under way, so the vessel can be trimmed to the water it is actually on rather than to a compromise picked on shore: higher to cut wetted area and drag on a clear run, lower for a wider, steadier stance when the water is confused or when precision matters more than speed.',
+    ],
+  },
+  {
+    title: 'A custom gimbal for the front lidar',
+    eyebrow: 'Stabilisation · Loop 04',
     images: [
       {
         image: frontLidarMount,
@@ -179,9 +190,9 @@ const evidence = [
       <span class="eyebrow">Technology</span>
       <h2 class="section-title">Attacking instability at the source</h2>
       <p class="section-lead">
-        Most student vessels accept wave motion and try to clean up the data in software. Ligmax holds the
-        boat and its sensors level mechanically, with three coordinated control loops, each closed around
-        live IMU feedback.
+        Most student vessels accept wave motion and try to clean up the data in software. Ligmax handles it
+        mechanically instead, with four control loops running on live sensor feedback: three that hold the
+        boat and its sensors level, and one that sets how deep it rides.
       </p>
     </div>
 
@@ -285,7 +296,7 @@ const evidence = [
     padding: 0;
     margin: clamp(2rem, 4vw, 2.8rem) 0 0;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.25rem;
   }
 
@@ -490,6 +501,12 @@ const evidence = [
     color: var(--muted);
     margin-top: 0.6rem;
     line-height: 1.5;
+  }
+
+  @media (max-width: 1040px) {
+    .loops {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   @media (max-width: 900px) {
