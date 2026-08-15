@@ -13,3 +13,6 @@ npm-debug.log*
 .DS_Store
 # wrangler
 .wrangler/
+# raw competition footage working folder (~210 MB of iPhone MOV/HEIC originals);
+# finished clips are committed under public/videos/
+competition_images/

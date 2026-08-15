@@ -1,7 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-import fullRender from '../assets/vessel-render.png';
-
 const stats = [
   { value: '≈5 kW', label: 'Combined thrust' },
   { value: '1.8 kWh', label: 'Li-ion energy store' },
@@ -17,8 +14,8 @@ const stats = [
       <h1>Student&#8209;built. Self&#8209;stabilising. Fully&nbsp;autonomous.</h1>
       <p class="hero-lead">
         Ligmax is a student team from the NTNU Department of Electronic Systems building a
-        roll- and pitch-stabilised autonomous trimaran, making its competitive debut at
-        Njord, the Autonomous Ship Challenge, in August 2026.
+        roll- and pitch-stabilised autonomous trimaran. It raced for the first time at Njord,
+        the Autonomous Ship Challenge, in August 2026.
       </p>
       <div class="hero-actions">
         <a class="btn btn--light" href="#vessel">Explore the vessel</a>
@@ -26,17 +23,34 @@ const stats = [
       </div>
     </div>
 
-    <div class="hero-visual">
-      <Image
-        src={fullRender}
-        alt="CAD render of the Ligmax autonomous trimaran in carbon fibre"
-        widths={[520, 760, 1080]}
-        sizes="(max-width: 900px) 92vw, 620px"
-        loading="eager"
-        fetchpriority="high"
-      />
-    </div>
+    <figure class="hero-visual">
+      <video
+        class="hero-video"
+        src="/videos/hero-loop.mp4"
+        poster="/videos/hero-loop.jpg"
+        width="1280"
+        height="720"
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-label="The Ligmax trimaran under power on the water at the Njord 2026 competition"
+      ></video>
+      <figcaption>
+        Ligmax under way at Njord 2026 &mdash;
+        <a href="/competition">see how the competition went</a>
+      </figcaption>
+    </figure>
   </div>
+
+  <script>
+    // Autoplay only when the visitor has not asked for reduced motion; without JS
+    // the poster frame stands in, so the hero never looks broken.
+    const heroVideo = document.querySelector<HTMLVideoElement>('.hero-video');
+    if (heroVideo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      heroVideo.play().catch(() => {});
+    }
+  </script>
 
   <div class="container">
     <dl class="hero-stats">
@@ -112,6 +126,7 @@ const stats = [
 
   .hero-visual {
     position: relative;
+    margin: 0;
   }
 
   .hero-visual::before {
@@ -122,11 +137,29 @@ const stats = [
     filter: blur(6px);
   }
 
-  .hero-visual img {
+  .hero-video {
     position: relative;
+    display: block;
     width: 100%;
     height: auto;
-    filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.45));
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: var(--navy-950);
+    box-shadow: 0 30px 40px rgba(0, 0, 0, 0.45);
+  }
+
+  .hero-visual figcaption {
+    position: relative;
+    margin-top: 0.85rem;
+    font-size: 0.86rem;
+    color: #93a5cd;
+  }
+
+  .hero-visual figcaption a {
+    color: #c3cee6;
+    font-weight: 600;
   }
 
   .hero-stats {

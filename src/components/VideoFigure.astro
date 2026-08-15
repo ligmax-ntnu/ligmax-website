@@ -1,0 +1,97 @@
+---
+interface Props {
+  /** File name inside /public/videos, without extension — the .mp4 and its poster .jpg share it. */
+  name: string;
+  title: string;
+  caption: string;
+  duration: string;
+  width: number;
+  height: number;
+  featured?: boolean;
+}
+
+const { name, title, caption, duration, width, height, featured = false } = Astro.props;
+---
+
+<figure class:list={['clip', { 'clip--featured': featured }]} data-reveal>
+  <video
+    class="clip-video"
+    src={`/videos/${name}.mp4`}
+    poster={`/videos/${name}.jpg`}
+    width={width}
+    height={height}
+    style={`aspect-ratio: ${width} / ${height}`}
+    controls
+    playsinline
+    loop
+    preload="none"
+  ></video>
+  <figcaption class="clip-caption">
+    <h3 class="clip-title">
+      {title}
+      <span class="clip-duration">{duration}</span>
+    </h3>
+    <p class="clip-text">{caption}</p>
+  </figcaption>
+</figure>
+
+<style>
+  .clip {
+    margin: 0;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .clip-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: var(--navy-950);
+    /* keeps the poster's box reserved before the file loads, so nothing jumps */
+    aspect-ratio: attr(width type(<number>)) / attr(height type(<number>));
+  }
+
+  .clip-caption {
+    padding: 1.1rem 1.25rem 1.25rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .clip-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 1.02rem;
+    margin: 0 0 0.35rem;
+  }
+
+  .clip-duration {
+    flex: none;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--blue);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .clip-text {
+    margin: 0;
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .clip--featured .clip-title {
+    font-size: 1.15rem;
+  }
+
+  .clip--featured .clip-text {
+    font-size: 0.98rem;
+    max-width: 68ch;
+  }
+</style>

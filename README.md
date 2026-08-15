@@ -50,6 +50,13 @@ Then add the custom domain in the Pages project settings as above.
   "Highlight a system" groups are defined in the `SYSTEMS` object in
   `src/components/VesselExplorer.astro`.
 - **Images** — drop files in `src/assets/` and import them; Astro optimises them at build time.
+  Downscale very large originals to ~2000 px first — Astro emits a full-size variant as the
+  `src` fallback, so a 7952 px photo ships a needless 2 MB file.
+- **Competition clips** — `public/videos/`, one `.mp4` plus a same-named `.jpg` poster per clip,
+  wired up through `src/components/VideoFigure.astro`. Encode from the originals in
+  `competition_images/` (gitignored) with `-display_rotation:v:0 0` — the iPhone `.MOV` files
+  carry a stale rotation flag that turns landscape footage sideways — and always finish with
+  `-movflags +faststart`. Keep every file under Cloudflare Pages' 25 MiB per-file limit.
 - **3D model** — `public/models/ligmax.glb`, Draco-compressed from the CAD export via
   `npx @gltf-transform/cli optimize <in.glb> public/models/ligmax.glb --compress draco --texture-compress webp`.
 - **Technical report PDF** — `public/docs/ligmax-technical-report-2026.pdf`.

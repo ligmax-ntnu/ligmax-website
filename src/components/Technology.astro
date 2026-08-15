@@ -1,12 +1,10 @@
 ---
 import { Image } from 'astro:assets';
-import batteryTrim from '../assets/pitch-trim-battery.png';
 import sensorCoverage from '../assets/lidar-coverage.png';
 import cameraCoverage from '../assets/camera-coverage.png';
 import batteryPack from '../assets/battery-pack-assembly.jpeg';
 import lidarTest from '../assets/lidar-scan-test.png';
 import buoyDetection from '../assets/buoy-detection.png';
-import rollTrim from '../assets/roll-trim-outriggers.png';
 import gimbalDrawing from '../assets/lidar-gimbal-drawing.png';
 import frontLidarMount from '../assets/front-lidar-mount.png';
 import operatorConsole from '../assets/operator-console.jpg';
@@ -35,8 +33,12 @@ const features = [
     eyebrow: 'Stabilisation · Loop 01',
     images: [
       {
-        image: batteryTrim,
-        alt: 'Cutaway render showing the battery sliding fore and aft inside the main hull',
+        video: 'pitch-only',
+        width: 1280,
+        height: 720,
+        alt: 'The Ligmax battery sliding forward and back along its linear rails inside the hull',
+        caption:
+          'The pitch loop on the bench at Njord 2026 — the battery running fore and aft on its rails.',
       },
     ],
     dark: true,
@@ -50,8 +52,12 @@ const features = [
     eyebrow: 'Stabilisation · Loop 02',
     images: [
       {
-        image: rollTrim,
-        alt: 'Render of the outriggers shifting vertically to counter roll',
+        video: 'tilt-only',
+        width: 1280,
+        height: 720,
+        alt: 'The Ligmax outriggers driving up and down to counter roll',
+        caption:
+          'The roll loop on the bench at Njord 2026 — the amas driving up and down against roll.',
       },
     ],
     dark: true,
@@ -185,12 +191,28 @@ const evidence = [
           <div class:list={['feature-media', { 'feature-media--dark': feature.dark }]}>
             {feature.images.map((item) => (
               <figure class="media-figure">
-                <Image
-                  src={item.image}
-                  alt={item.alt}
-                  widths={[480, 720, 960]}
-                  sizes="(max-width: 900px) 92vw, 520px"
-                />
+                {item.video ? (
+                  <video
+                    class="media-video"
+                    src={`/videos/${item.video}.mp4`}
+                    poster={`/videos/${item.video}.jpg`}
+                    width={item.width}
+                    height={item.height}
+                    style={`aspect-ratio: ${item.width} / ${item.height}`}
+                    controls
+                    loop
+                    playsinline
+                    preload="none"
+                    aria-label={item.alt}
+                  />
+                ) : (
+                  <Image
+                    src={item.image}
+                    alt={item.alt}
+                    widths={[480, 720, 960]}
+                    sizes="(max-width: 900px) 92vw, 520px"
+                  />
+                )}
                 {item.caption && <figcaption>{item.caption}</figcaption>}
               </figure>
             ))}
@@ -219,10 +241,12 @@ const evidence = [
     </div>
 
     <div class="evidence" data-reveal>
-      <h3 class="evidence-title">Validated in the lab, headed for the water</h3>
+      <h3 class="evidence-title">Validated in the lab, then raced</h3>
       <p class="evidence-lead">
-        Every subsystem has been integrated and bench-tested. Pool trials and full-course testing against
-        real buoys in Trondheim and Oslo complete the campaign ahead of the competition.
+        Every subsystem was integrated and bench-tested before pool trials and full-course testing
+        against real buoys in Trondheim and Oslo. The vessel then raced at Njord 2026, where a flooded
+        hull on day one cost us the lidars and turned the week into a rebuild —
+        <a href="/competition">the full account is here</a>.
       </p>
       <ul class="evidence-grid">
         {evidence.map((item) => (
@@ -342,6 +366,14 @@ const evidence = [
   .feature-media img {
     width: 100%;
     height: auto;
+  }
+
+  .media-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: var(--navy-950);
+    margin-bottom: 0.6rem;
   }
 
   .feature-eyebrow {

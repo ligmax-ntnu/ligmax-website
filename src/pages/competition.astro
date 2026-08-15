@@ -1,0 +1,441 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import VideoFigure from '../components/VideoFigure.astro';
+import teamFlag from '../assets/njord-team-flag.jpg';
+import popUpLights from '../assets/njord-pop-up-lights.jpg';
+
+const scoreboard = [
+  { label: 'Opening round', value: '4th' },
+  { label: 'Final standing', value: '14th' },
+  { label: 'Lost for good', value: 'Lidars, BMS' },
+];
+
+// All clips were filmed on the final day of the competition, once the boat had
+// been rebuilt. Sizes match the encoded files in /public/videos.
+const onWater = [
+  {
+    name: 'smooth-driving',
+    title: 'Driving under power',
+    duration: '0:13',
+    width: 1280,
+    height: 720,
+    caption: 'The boat running on open water on the last day of the competition.',
+  },
+  {
+    name: 'ama-height-live',
+    title: 'Setting ride height live',
+    duration: '0:25',
+    width: 1280,
+    height: 720,
+    caption:
+      'The amas driving up and down to set the height of the boat in the water, adjusted live while under way.',
+  },
+  {
+    name: 'ama-retract-on-water',
+    title: 'Amas retracting on water',
+    duration: '0:04',
+    width: 1280,
+    height: 736,
+    caption: 'A short look at the amas pulling back in while the boat is floating.',
+  },
+];
+
+const onBench = [
+  {
+    name: 'tilt-only',
+    title: 'Roll axis only',
+    duration: '0:14',
+    width: 1280,
+    height: 720,
+    caption: 'The amas alone, driving up and down to fight roll.',
+  },
+  {
+    name: 'pitch-only',
+    title: 'Pitch axis only',
+    duration: '0:07',
+    width: 1280,
+    height: 720,
+    caption: 'The battery alone, sliding forward and back along its rails to trim pitch.',
+  },
+  {
+    name: 'battery-dry-test',
+    title: 'Battery travel, end to end',
+    duration: '0:13',
+    width: 1280,
+    height: 720,
+    caption:
+      'The battery running from full forward to full aft and back again, showing the complete range of the pitch-trim slider.',
+  },
+  {
+    name: 'ama-height-dry-test',
+    title: 'Ama travel, end to end',
+    duration: '0:16',
+    width: 1280,
+    height: 720,
+    caption: 'Both amas extending and retracting through their full stroke on the bench.',
+  },
+];
+---
+
+<BaseLayout
+  title="Njord 2026 — Ligmax | Fourth after round one, fourteenth overall"
+  description="How Ligmax's first Njord Autonomous Ship Challenge went: a flooded boat on day one, fourth place in the opening round, and a part-by-part rebuild filmed on the final day."
+>
+  <Header />
+  <main id="main">
+    <section class="page-intro">
+      <div class="container">
+        <span class="intro-eyebrow">Njord 2026 &middot; Trondheim</span>
+        <h1>Fourth after round one, fourteenth by the end</h1>
+        <p>
+          The tasks were not what beat us. Hardware was. On the first day of testing the boat went under,
+          and although we got it running again in time to place fourth in the opening round, the damage
+          kept surfacing for the rest of the week. This is what happened, and what the boat could still do
+          on the final day.
+        </p>
+        <ul class="scoreboard">
+          {scoreboard.map((item) => (
+            <li>
+              <span class="scoreboard-value">{item.value}</span>
+              <span class="scoreboard-label">{item.label}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="story" data-reveal>
+          <h2>The boat went under during testing</h2>
+          <p>
+            On our first day of testing the Pixhawk lost its settings. The main thrusters were no longer
+            configured as bidirectional, so the moment we armed the boat they went to full reverse. The
+            boat was pulled under, and everything on board went with it.
+          </p>
+          <p>
+            We saved it from sinking, but it came out full of water. We took every part out, cleaned all of
+            it, and flushed everything with fresh water three times in a row to get the seawater out, with a
+            lot of electronic cleaner on top. Most of it came back. The lidars did not — those were the one
+            thing that died permanently that day.
+          </p>
+          <p>
+            That loss mattered more than any other. Both 360° lidars are what give Ligmax range data on
+            every bearing, and the whole obstacle-detection chain — clustering scan returns into buoys,
+            then colouring them from the cameras — starts there. The gimbal we built to hold the bow lidar
+            level survived; the sensor it was built for did not.
+          </p>
+
+          <h2>Fourth place, one day later</h2>
+          <p>
+            We went out the next day and placed fourth in the opening round. That was the high point of the
+            week, and it happened roughly twenty-four hours after pulling a flooded boat out of the
+            fjord.
+          </p>
+
+          <h2>Then it came apart, one piece at a time</h2>
+          <p>
+            The cleaning bought us the opening round, but it did not stop what the seawater had started.
+            Oxidation kept spreading, and components failed one after another for the rest of the
+            competition. We finished fourteenth overall. The tasks themselves were not as hard as we had
+            expected going in — we simply could not keep the hardware alive long enough to run them.
+          </p>
+
+          <h2>Rebuilt by the final day</h2>
+          <p>
+            We clawed it back part by part, and by the last day of the competition the boat was close to
+            full function again. Only the lidars and the battery management system stayed dead. Every video
+            below was filmed that day.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft">
+      <div class="container">
+        <div class="clips-head" data-reveal>
+          <span class="eyebrow">Final day &middot; On the water</span>
+          <h2 class="section-title">What it could still do</h2>
+          <p class="section-lead">
+            Filmed after the rebuild, running on the fjord without lidars or the BMS.
+          </p>
+        </div>
+        <div class="clip-grid clip-grid--three">
+          {onWater.map((clip) => <VideoFigure {...clip} />)}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="clips-head" data-reveal>
+          <span class="eyebrow">Final day &middot; On the bench</span>
+          <h2 class="section-title">The stabilisation system, moving</h2>
+          <p class="section-lead">
+            Ligmax trims itself on two axes: the amas drive up and down against roll, and the battery
+            slides fore and aft against pitch. On the bench you can watch both react to the hull being
+            tipped by hand.
+          </p>
+        </div>
+
+        <div class="clip-feature">
+          <VideoFigure
+            name="tilt-and-roll-dry-test"
+            title="Both axes together"
+            duration="0:49"
+            width={1280}
+            height={720}
+            caption="The hull rolled and pitched by hand on the table. The battery slides forward and back and the amas drive up and down in response — the same corrections that would hold the boat level in the water."
+            featured
+          />
+        </div>
+
+        <div class="clip-grid clip-grid--two">
+          {onBench.map((clip) => <VideoFigure {...clip} />)}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft">
+      <div class="container">
+        <div class="aftermath" data-reveal>
+          <div class="aftermath-text">
+            <span class="eyebrow">Aftermath</span>
+            <h2 class="section-title">Still emptying it out</h2>
+            <p>
+              Water stayed in the boat long after the day it went under. This is us draining the NEMA
+              enclosure in the bottom of the bow — one of the places seawater sat and kept working on the
+              electronics all week.
+            </p>
+          </div>
+          <VideoFigure
+            name="nema-water"
+            title="Draining the bow NEMA"
+            duration="0:03"
+            width={1280}
+            height={932}
+            caption="Emptying the NEMA enclosure at the bottom front of the boat."
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="stills">
+          <figure class="still" data-reveal>
+            <Image
+              src={popUpLights}
+              alt="The forward-facing pop-up lights on the Ligmax hull opened and lit inside the workshop"
+              widths={[560, 860, 1200]}
+              sizes="(max-width: 860px) 92vw, 540px"
+            />
+            <figcaption>
+              The forward-facing lights popped open and lit. They survived the flooding.
+            </figcaption>
+          </figure>
+          <figure class="still" data-reveal>
+            <Image
+              src={teamFlag}
+              alt="Two Ligmax team members holding a Norwegian flag behind the vessel at the Njord 2026 competition site"
+              widths={[560, 860, 1200]}
+              sizes="(max-width: 860px) 92vw, 540px"
+            />
+            <figcaption>Ligmax and the boat at the Njord 2026 site in Trondheim.</figcaption>
+          </figure>
+        </div>
+
+        <div class="next-year" data-reveal>
+          <h2>What we take into next year</h2>
+          <p>
+            We came away knowing the tasks are within reach — we were never short on capability, we were
+            short on hardware that survived the week. Waterproofing, connector choice and a recovery plan
+            for a flooded boat are now the first things on the list rather than the last. We learned a
+            great deal this year, and we are going back with high expectations.
+          </p>
+          <div class="next-year-actions">
+            <a class="btn btn--primary" href="/docs/ligmax-technical-report-2026.pdf" target="_blank" rel="noopener">
+              Read the technical report (PDF)
+            </a>
+            <a class="btn btn--outline" href="/#contact">Partner with us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-intro {
+    background:
+      radial-gradient(44rem 20rem at 78% 0%, rgba(79, 127, 206, 0.16), transparent 62%),
+      linear-gradient(180deg, var(--navy-950), var(--navy-800));
+    color: #c3cee6;
+    padding-block: clamp(3rem, 6vw, 4.5rem);
+  }
+
+  .intro-eyebrow {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #9db8e8;
+    margin-bottom: 0.8rem;
+  }
+
+  .page-intro h1 {
+    color: #fff;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    margin-bottom: 0.6rem;
+  }
+
+  .page-intro p {
+    max-width: 68ch;
+    font-size: 1.08rem;
+    margin: 0;
+  }
+
+  .scoreboard {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    margin: 2rem 0 0;
+    padding: 1.5rem 0 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .scoreboard-value {
+    display: block;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .scoreboard-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9db8e8;
+    margin-top: 0.35rem;
+  }
+
+  .story {
+    max-width: 68ch;
+  }
+
+  .story h2 {
+    font-size: clamp(1.35rem, 2.6vw, 1.7rem);
+    margin-top: 2.2rem;
+  }
+
+  .story h2:first-child {
+    margin-top: 0;
+  }
+
+  .story p {
+    font-size: 1.04rem;
+  }
+
+  .clips-head {
+    margin-bottom: clamp(1.8rem, 3.5vw, 2.6rem);
+  }
+
+  .clip-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .clip-grid--three {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .clip-grid--two {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .clip-feature {
+    margin-bottom: 1.5rem;
+  }
+
+  .aftermath {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.8rem, 4vw, 3rem);
+    align-items: center;
+  }
+
+  .aftermath-text p {
+    margin: 0;
+    max-width: 46ch;
+  }
+
+  .stills {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .still {
+    margin: 0;
+  }
+
+  .still img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .still figcaption {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-top: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .next-year {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    padding-top: clamp(2rem, 4vw, 2.5rem);
+    border-top: 1px solid var(--line);
+  }
+
+  .next-year p {
+    max-width: 66ch;
+  }
+
+  .next-year-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+  }
+
+  @media (max-width: 980px) {
+    .clip-grid--three {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 760px) {
+    .clip-grid--three,
+    .clip-grid--two,
+    .aftermath,
+    .stills {
+      grid-template-columns: 1fr;
+    }
+
+    .scoreboard {
+      gap: 1.5rem 2rem;
+    }
+  }
+</style>
