@@ -3,6 +3,8 @@
 Official website for **Team Ligmax**, an autonomous surface vessel team from the NTNU
 Department of Electronic Systems, competing at [Njord — The Autonomous Ship
 Challenge](https://www.njordchallenge.com/) 2026. Live at [ligmax.no](https://ligmax.no).
+Ligmax is one of the machines built by [Dialga](https://dialga.no), the student engineering
+organisation behind the project.
 
 Built with [Astro](https://astro.build) — fully static output, no server required.
 
