@@ -36,7 +36,7 @@ try {
   const data = await page.evaluate(() => window.__ligmax);
 
   const titled = Object.entries(partInfo).filter(([, v]) => v.title);
-  console.log(`\n— Part titles (${titled.length} expected) —`);
+  console.log(`\n== Part titles (${titled.length} expected) ==`);
   for (const [key, value] of titled) {
     const sanitized = key.replace(/\s/g, '_').replace(/[\[\].:/]/g, '');
     const match = data.parts.find((p) => p.gltfName === key || p.threeName === sanitized);
@@ -51,7 +51,7 @@ try {
     }
   }
 
-  console.log('\n— Systems —');
+  console.log('\n== Systems ==');
   for (const [key, counts] of Object.entries(data.systems)) {
     const ok = counts.resolved === counts.listed;
     if (!ok) failures++;
@@ -66,7 +66,7 @@ try {
     console.log(`FAIL  ${p.gltfName} shows "Structural component" despite having a title`);
   }
 
-  console.log(`\n${failures === 0 ? 'QA PASSED' : 'QA FAILED'} — ${failures} failure(s)`);
+  console.log(`\n${failures === 0 ? 'QA PASSED' : 'QA FAILED'}: ${failures} failure(s)`);
 } finally {
   await browser.close();
 }

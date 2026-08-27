@@ -6,13 +6,13 @@ import Footer from '../components/Footer.astro';
 // Every value on this page is read from the source in the ligmax-ntnu repos or from
 // the 2026 technical report. Keep it in sync with ligmax-main/docs/fleet.json.
 const ports = [
-  { port: '443', transport: 'TCP / HTTPS', service: 'Operator dashboard, via reverse proxy', host: 'Ground station', scope: 'Internet — live.ligmax.no' },
+  { port: '443', transport: 'TCP / HTTPS', service: 'Operator dashboard, via reverse proxy', host: 'Ground station', scope: 'Internet (live.ligmax.no)' },
   { port: '3338', transport: 'TCP / HTTP', service: 'Dashboard app behind the proxy', host: 'Ground station', scope: 'localhost only' },
   { port: '3338', transport: 'TCP', service: 'Jetson frame ingest', host: 'Viewer host', scope: 'Vessel LAN' },
   { port: '8771', transport: 'UDP', service: 'Telemetry ingest from the vessel', host: 'Ground station', scope: 'Vessel LAN / 5G' },
   { port: '8080', transport: 'HTTP', service: 'MJPEG camera view', host: 'Viewer host', scope: 'Vessel LAN' },
   { port: '5555–5560', transport: 'TCP (ZeroMQ)', service: 'Companion-computer node bus', host: 'Raspberry Pi 5', scope: 'localhost only' },
-  { port: '2101', transport: 'TCP (NTRIP)', service: 'RTK corrections — planned', host: 'Ground station', scope: 'Internet — rtk.ligmax.no' },
+  { port: '2101', transport: 'TCP (NTRIP)', service: 'RTK corrections (planned)', host: 'Ground station', scope: 'Internet (rtk.ligmax.no)' },
 ];
 
 const buses = [
@@ -24,7 +24,7 @@ const buses = [
 ];
 
 const sliderPins = [
-  { pin: '34', dir: 'in', signal: 'PIXHAWK_PWM_PIN', to: 'Pixhawk PWM out — rail position demand' },
+  { pin: '34', dir: 'in', signal: 'PIXHAWK_PWM_PIN', to: 'Pixhawk PWM out, rail position demand' },
   { pin: '35', dir: 'in', signal: 'RPI_HOMING_PIN', to: 'Raspberry Pi, 3.3 V homing trigger' },
   { pin: '25', dir: 'out', signal: 'PUL_PIN', to: 'DM542C PUL+ (step)' },
   { pin: '26', dir: 'out', signal: 'DIR_PIN', to: 'DM542C DIR+' },
@@ -35,8 +35,8 @@ const sliderPins = [
 ];
 
 const translatorPins = [
-  { pin: '34', dir: 'in', signal: 'RC_CH1_PIN', to: 'Pixhawk out 1 — left actuator demand' },
-  { pin: '35', dir: 'in', signal: 'RC_CH2_PIN', to: 'Pixhawk out 2 — right actuator demand' },
+  { pin: '34', dir: 'in', signal: 'RC_CH1_PIN', to: 'Pixhawk out 1, left actuator demand' },
+  { pin: '35', dir: 'in', signal: 'RC_CH2_PIN', to: 'Pixhawk out 2, right actuator demand' },
   { pin: '25', dir: 'out', signal: 'MOTOR_A_IN1', to: '160 W driver IN1' },
   { pin: '26', dir: 'out', signal: 'MOTOR_A_IN2', to: '160 W driver IN2' },
   { pin: '27', dir: 'out', signal: 'MOTOR_A_ENA', to: '160 W driver ENA (PWM 0–255)' },
@@ -47,7 +47,7 @@ const translatorPins = [
 ---
 
 <BaseLayout
-  title="Systems — Ligmax | Communications, power and GPIO"
+  title="Systems | Ligmax | Communications, power and GPIO"
   description="How Ligmax is wired: the full communications map with every port, the power architecture from the 12S12P pack to the thrusters, and the GPIO pin maps for both ESP32 subsystem boards."
 >
   <Header />
@@ -73,7 +73,7 @@ const translatorPins = [
         <p class="section-lead">
           The Raspberry Pi 5 is the hub. Perception runs beside it on the Jetson, hard real-time
           control runs below it on the Pixhawk, and everything reaching shore goes out through the
-          5G router — except the RC link, which is deliberately independent of all of it.
+          5G router. The one exception is the RC link, which is deliberately independent of all of it.
         </p>
 
         <figure class="diagram" data-reveal>
@@ -110,7 +110,7 @@ const translatorPins = [
 
             <rect x="672" y="36" width="244" height="60" rx="8" class="box" />
             <text x="794" y="61" class="t-title">Edge viewer</text>
-            <text x="794" y="80" class="t-sub">receiver.py — draws boxes, serves MJPEG</text>
+            <text x="794" y="80" class="t-sub">receiver.py: draws boxes, serves MJPEG</text>
 
             <!-- browser <-> dashboard -->
             <line x1="240" y1="66" x2="296" y2="66" class="net" marker-end="url(#ar-net)" marker-start="url(#ar-net)" />
@@ -217,7 +217,7 @@ const translatorPins = [
             </g>
           </svg>
           <figcaption>
-            Everything that leaves the vessel is coloured and carries a port number — those are the
+            Everything that leaves the vessel is coloured and carries a port number; those are the
             links a firewall sees. The FRSky RC path is drawn separately because it shares no
             hardware with the 5G link: if the network drops, it still flies.
           </figcaption>
@@ -324,7 +324,7 @@ The dashboard is served over HTTPS on 443 by a reverse proxy in front of the app
             <text x="371" y="176" class="t-title">E-stop safety loop</text>
             <text x="371" y="197" class="t-sub">physical button</text>
             <text x="371" y="215" class="t-sub">+ compute-driven relay</text>
-            <text x="371" y="240" class="t-sub t-em">in series — both must close</text>
+            <text x="371" y="240" class="t-sub t-em">in series: both must close</text>
             <line x1="220" y1="206" x2="274" y2="206" class="hv" marker-end="url(#ar-hv)" />
 
             <!-- contactor -->
@@ -361,7 +361,7 @@ The dashboard is served over HTTPS on 443 by a reverse proxy in front of the app
             <text x="810" y="441" class="t-sub">lidars · sonar · GNSS · 5G router</text>
             <line x1="672" y1="404" x2="696" y2="404" class="lv" marker-end="url(#ar-lv)" />
 
-            <!-- 9V backup — independent of the pack and of the contactor -->
+            <!-- 9V backup, independent of the pack and of the contactor -->
             <rect x="20" y="404" width="200" height="66" rx="8" class="box box-warn" />
             <text x="120" y="430" class="t-title">9 V backup circuit</text>
             <text x="120" y="449" class="t-sub">independent of the main pack</text>
@@ -385,7 +385,7 @@ The dashboard is served over HTTPS on 443 by a reverse proxy in front of the app
           <figcaption>
             The safety loop is the part worth reading twice: the E-stop button and a relay driven by
             the main computer sit <em>in series</em>, so either one opening cuts propulsion. The 9 V
-            lid circuit is independent of everything else by design — it has to work when nothing
+            lid circuit is independent of everything else by design; it has to work when nothing
             else does.
           </figcaption>
         </figure>
@@ -405,7 +405,7 @@ The dashboard is served over HTTPS on 443 by a reverse proxy in front of the app
         <h2 class="section-title">Two ESP32s, one pinout, different meanings</h2>
         <p class="section-lead">
           The active stabilisation runs on two separate ESP32 boards. Both take servo PWM from the
-          Pixhawk and both use the same eight GPIO pins — but those pins drive completely different
+          Pixhawk and both use the same eight GPIO pins, but those pins drive completely different
           hardware on each board. Getting the two mixed up is the easiest way to damage something.
         </p>
 
@@ -421,8 +421,8 @@ The dashboard is served over HTTPS on 443 by a reverse proxy in front of the app
               </marker>
             </defs>
 
-            <text x="20" y="24" class="zone">ROLL TRIM — the amas</text>
-            <text x="500" y="24" class="zone">PITCH TRIM — the battery rail</text>
+            <text x="20" y="24" class="zone">ROLL TRIM: the amas</text>
+            <text x="500" y="24" class="zone">PITCH TRIM: the battery rail</text>
             <line x1="470" y1="40" x2="470" y2="376" class="divider" />
 
             <!-- ── left chain ── -->
@@ -441,7 +441,7 @@ The dashboard is served over HTTPS on 443 by a reverse proxy in front of the app
 
             <rect x="248" y="264" width="196" height="52" rx="8" class="box box-soft" />
             <text x="346" y="286" class="t-title">Ama linear actuators</text>
-            <text x="346" y="304" class="t-sub">left + right — righting moment</text>
+            <text x="346" y="304" class="t-sub">left + right = righting moment</text>
 
             <line x1="110" y1="100" x2="110" y2="146" class="pwm" marker-end="url(#ar-chain)" />
             <text x="118" y="127" class="t-bus a-start">PWM → GPIO 34, 35</text>
@@ -494,7 +494,7 @@ The dashboard is served over HTTPS on 443 by a reverse proxy in front of the app
 
         <div class="pin-grid">
           <div>
-            <h3 class="sub-title">Translator ESP32 — roll trim</h3>
+            <h3 class="sub-title">Translator ESP32: roll trim</h3>
             <div class="table-wrap">
               <table class="data">
                 <thead><tr><th>GPIO</th><th>Dir</th><th>Signal</th><th>Wired to</th></tr></thead>
@@ -512,7 +512,7 @@ The dashboard is served over HTTPS on 443 by a reverse proxy in front of the app
             </div>
           </div>
           <div>
-            <h3 class="sub-title">Slider ESP32 — pitch trim</h3>
+            <h3 class="sub-title">Slider ESP32: pitch trim</h3>
             <div class="table-wrap">
               <table class="data">
                 <thead><tr><th>GPIO</th><th>Dir</th><th>Signal</th><th>Wired to</th></tr></thead>
@@ -540,8 +540,8 @@ The dashboard is served over HTTPS on 443 by a reverse proxy in front of the app
 
         <div class="build-more" data-reveal>
           <p>
-            Full engineering detail — hull geometry, control loops, test results and the complete
-            component list — is in the technical report.
+            Full engineering detail (hull geometry, control loops, test results and the complete
+            component list) is in the technical report.
           </p>
           <div class="build-more-actions">
             <a class="btn btn--primary" href="/docs/ligmax-technical-report-2026.pdf" target="_blank" rel="noopener">

@@ -160,7 +160,7 @@
       });
     };
 
-    // Solid highlight material — the model's baked carbon materials are too dark
+    // Solid highlight material: the model's baked carbon materials are too dark
     // for a subtle tint to read, so selection swaps to an unmistakable brand blue.
     const highlightMaterial = new THREE.MeshStandardMaterial({
       color: 0x3a62b4,
@@ -228,19 +228,19 @@
         const REGIONS = [
           {
             name: 'Body1.010',
-            title: 'Right side hull — section',
+            title: 'Right side hull, section',
             description:
               'Part of the starboard (right) outrigger, one of the two side hulls that give the trimaran its wide, stable stance.',
           },
           {
             name: 'Body1.017',
-            title: 'Left side hull — section',
+            title: 'Left side hull, section',
             description:
               'Part of the port (left) outrigger, one of the two side hulls that give the trimaran its wide, stable stance.',
           },
           {
             name: 'Body1.003',
-            title: 'Main hull — section',
+            title: 'Main hull, section',
             description:
               'Part of the central hull, which carries the propulsion system, the sliding battery and the main electronics.',
           },
@@ -322,7 +322,7 @@
       }
     );
 
-    // Picking — only when the pointer has not been dragged
+    // Picking, only when the pointer has not been dragged
     const raycaster = new THREE.Raycaster();
     const pointer = new THREE.Vector2();
     let downX = 0;

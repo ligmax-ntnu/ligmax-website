@@ -1,4 +1,4 @@
-// Generates public/og.jpg (1200x630) — navy gradient, wordmark, tagline and vessel render.
+// Generates public/og.jpg (1200x630): navy gradient, wordmark, tagline and vessel render.
 import sharp from 'sharp';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -26,7 +26,7 @@ const background = `
   <text x="88" y="330" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#eef3fc">Autonomous Surface</text>
   <text x="88" y="372" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#eef3fc">Vessel Team</text>
   <text x="88" y="410" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#a8b6d6">NTNU Trondheim</text>
-  <text x="88" y="440" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#6f7ea6">Njord — The Autonomous Ship Challenge 2026</text>
+  <text x="88" y="440" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#6f7ea6">Njord: The Autonomous Ship Challenge 2026</text>
 </svg>`;
 
 // Real Ligmax logo, recoloured white for the dark background and rasterised at high
@@ -43,7 +43,7 @@ const logo = await sharp(Buffer.from(logoSvg))
   .toBuffer();
 
 // Trim the render's transparent padding, then size the vessel as the hero on the
-// right — vertically centred and fully in frame. The logo + tagline form one
+// right, vertically centred and fully in frame. The logo + tagline form one
 // cohesive, vertically-centred block on the left, clear of the vessel.
 const boat = await sharp(path.join(root, 'src/assets/vessel-render.png'))
   .trim()

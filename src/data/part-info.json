@@ -12,43 +12,43 @@
     "description": "The forward hatch on the main hull, opened for access to the front lidar gimbal and its drive motors while keeping the bow sealed on the water."
   },
   "Body1.010": {
-    "title": "Side hull — right (ama)",
+    "title": "Side hull, right (ama)",
     "description": "The starboard outrigger. Together the two outriggers carry roughly 60% of the vessel's buoyancy, giving the trimaran its wide, stable stance."
   },
   "Body1.017": {
-    "title": "Side hull — left (ama)",
+    "title": "Side hull, left (ama)",
     "description": "The port outrigger. Together the two outriggers carry roughly 60% of the vessel's buoyancy, giving the trimaran its wide, stable stance."
   },
   "Body1.013": {
-    "title": "Slide mechanism — right hull (1)",
+    "title": "Slide mechanism, right hull (1)",
     "description": "Element of the starboard slide mechanism. A linear actuator drives this linkage to shift the outrigger vertically, adjusting the righting moment as part of the active roll-stabilisation system."
   },
   "Body1.014": {
-    "title": "Slide mechanism — right hull (2)",
+    "title": "Slide mechanism, right hull (2)",
     "description": "Companion element of the starboard slide mechanism, guiding the outrigger as the linear actuator extends and retracts."
   },
   "Body2.005": {
-    "title": "Extension arm — left hull (1)",
+    "title": "Extension arm, left hull (1)",
     "description": "Extending element on the port side. Driven by a linear actuator, it moves the outrigger vertically to trim roll and keep the sensor platform level."
   },
   "Body2.004": {
-    "title": "Extension arm — left hull (2)",
+    "title": "Extension arm, left hull (2)",
     "description": "Companion element of the port extension mechanism, transferring actuator motion to the outrigger."
   },
   "Body72": {
-    "title": "Main thruster — right",
+    "title": "Main thruster, right",
     "description": "The starboard main drive: a Flipsky 5085 brushless outrunner rated around 2.5 kW, commanded by a VESC 6.7 controller over the vehicle CAN bus."
   },
   "Body73": {
-    "title": "Main thruster — left",
+    "title": "Main thruster, left",
     "description": "The port main drive, identical to its starboard twin. Differential thrust between the pair steers the vessel, so no rudder is required."
   },
   "propeller_3": {
-    "title": "Propeller — right",
+    "title": "Propeller, right",
     "description": "Starboard propeller, direct-driven by the main thruster."
   },
   "propeller_3 (1)": {
-    "title": "Propeller — left",
+    "title": "Propeller, left",
     "description": "Port propeller, direct-driven by the main thruster."
   },
   "Body1.006": {
@@ -64,11 +64,11 @@
     "description": "GNSS/compass antenna supplying global position and heading for waypoint navigation and line-of-sight guidance."
   },
   "Sphere": {
-    "title": "Camera — right",
+    "title": "Camera, right",
     "description": "The starboard 220° wide-angle camera. The camera pair adds the colour that lidar cannot see, classifying detected objects such as red and green channel markers."
   },
   "Sphere.001": {
-    "title": "Camera — left",
+    "title": "Camera, left",
     "description": "The port 220° wide-angle camera, mirroring the starboard unit to cover the full forward arc."
   },
   "M1": {
@@ -103,11 +103,11 @@
   "Body2.001": { "title": "", "description": "" },
   "Body1.001": { "title": "", "description": "" },
   "2Back (1)": {
-    "title": "Main hull — printed section (1)",
+    "title": "Main hull, printed section (1)",
     "description": "A separately printed section of the main hull. The hull is 3D-printed in pieces, then joined and skinned with carbon fibre and epoxy for a light, stiff, waterproof shell."
   },
   "2Back (2)": {
-    "title": "Main hull — printed section (2)",
+    "title": "Main hull, printed section (2)",
     "description": "A separately printed section of the main hull. The hull is 3D-printed in pieces, then joined and skinned with carbon fibre and epoxy for a light, stiff, waterproof shell."
   },
   "Body1.002": { "title": "", "description": "" },

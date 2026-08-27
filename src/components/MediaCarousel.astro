@@ -10,7 +10,7 @@ interface Slide {
 
 interface Props {
   slides: Slide[];
-  /** CSS aspect-ratio for the frame — pick one that suits the slides so letterboxing stays small. */
+  /** CSS aspect-ratio for the frame: pick one that suits the slides so letterboxing stays small. */
   ratio?: string;
 }
 
@@ -98,7 +98,7 @@ const { slides, ratio = '4 / 3' } = Astro.props;
   }
 
   /* global.css sets `img { display: block }`, which outranks the [hidden]
-     attribute — without this every slide would stack on the first. */
+     attribute; without this every slide would stack on the first. */
   .carousel-image[hidden],
   .carousel-text[hidden] {
     display: none;

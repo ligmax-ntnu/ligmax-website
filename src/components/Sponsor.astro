@@ -1,5 +1,12 @@
 ---
-const email = 'andreas.e.lindeman@gmail.com';
+/*
+ * dialga.no runs a catch-all, so ligmax@ delivers without any mailbox setup.
+ * `sponsorEmail` is deliberately the shared Dialga alias: sponsorship on all
+ * three sites lands in one place; general Ligmax post stays on the project
+ * alias. Mirror this split if a new contact point is added.
+ */
+const email = 'ligmax@dialga.no';
+const sponsorEmail = 'sponsors@dialga.no';
 
 const benefits = [
   'Brand placement on the vessel, team apparel and this site',
@@ -38,7 +45,7 @@ const benefits = [
         more about the project, we would like to hear from you.
       </p>
       <div class="contact-actions">
-        <a class="btn btn--primary" href={`mailto:${email}?subject=Sponsorship%20enquiry%20%E2%80%94%20Team%20Ligmax`}>
+        <a class="btn btn--primary" href={`mailto:${sponsorEmail}?subject=Sponsorship%20enquiry%20%E2%80%94%20Team%20Ligmax`}>
           Become a sponsor
         </a>
         <a class="btn btn--outline" href={`mailto:${email}?subject=Enquiry%20%E2%80%94%20Team%20Ligmax`}>
